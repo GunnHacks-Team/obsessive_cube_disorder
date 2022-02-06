@@ -1,15 +1,37 @@
 import React from 'react';
 import { Matrix, MulticlassClassifier } from '../ml.js';
 import trainedModel from '../training.js';
+import {Link} from 'react-router-dom';
 
 class Capture extends React.Component {
 	constructor(props) {
 		console.clear();
 		super(props);
-		// this.state = {
-		// 	// classifier: new MulticlassClassifier(null, null, [3, 16, 16, 3]),
-		// };
-		this.captureImage = this.captureImage.bind(this);
+		this.state = {
+			sides: [],
+		};
+		this.drawImage = this.drawImage.bind(this);
+		this.useImage = this.useImage.bind(this);
+		this.removeImage = this.removeImage.bind(this);
+	}
+	useImage() {
+		let { imageData, size } = this.getImageData();
+		let scaledImageData = this.getScaledImageData(imageData, size);
+		this.printImageData(scaledImageData);
+		let classifiedImageData = this.getClassifiedImageData(scaledImageData);
+		this.printClassifiedImageData(classifiedImageData);
+		let slicedClassifiedImageData = this.getSlicedClassifiedImageData(classifiedImageData);
+		let averagedClassifiedImageData = this.getAveragedClassifiedImageData(slicedClassifiedImageData);
+		let side = this.getSide(averagedClassifiedImageData);
+		// set state
+		this.setState({
+			sides: [...this.state.sides, side],
+		});
+	}
+	removeImage() {
+		this.setState({
+			sides: this.state.sides.slice(0, -1),
+		});
 	}
 	makeVideo() {
 		navigator.mediaDevices.getUserMedia({ video: true, audio: false })
@@ -21,21 +43,8 @@ class Capture extends React.Component {
 				console.log(err);
 			});
 		return (
-			<div id="video-container">
-				<video id="video" ref={(video) => { this.video = video; }}></video>
-			</div>
+			<video id="video" ref={(video) => { this.video = video; }}></video>
 		);
-	}
-	captureImage() {
-		let { imageData, size } = this.getImageData();
-		let scaledImageData = this.getScaledImageData(imageData, size);
-		this.printImageData(scaledImageData);
-		let classifiedImageData = this.getClassifiedImageData(scaledImageData);
-		this.printClassifiedImageData(classifiedImageData);
-		let slicedClassifiedImageData = this.getSlicedClassifiedImageData(classifiedImageData);
-		let averagedClassifiedImageData = this.getAveragedClassifiedImageData(slicedClassifiedImageData);
-		let side = this.getSide(averagedClassifiedImageData);
-		console.log(side);
 	}
 	getSide(averagedClassifiedImageData) {
 		let side = new Matrix(3, 3);
@@ -58,19 +67,26 @@ class Capture extends React.Component {
 	getSlicedClassifiedImageData(classifiedImageData) {
 		// reshape into a square
 		let size = Math.sqrt(classifiedImageData.data[0].length);
-		console.log("size", size);
 		classifiedImageData = classifiedImageData.reshape(size, size);
 		// slice
 		let sliced = [];
 		let squareSize = size / 3;
 		for (let i = 0; i < 3; i++) {
 			for (let j = 0; j < 3; j++) {
-				sliced.push(classifiedImageData.slice(i * squareSize, (i + 1) * squareSize, j * squareSize, (j + 1) * squareSize));	
+				sliced.push(classifiedImageData.slice(i * squareSize, (i + 1) * squareSize, j * squareSize, (j + 1) * squareSize));
 			}
 		}
 		return sliced;
 	}
 	getImageData() {
+		let canvas = document.getElementById('canvas');
+		let context = canvas.getContext('2d');
+		let size = canvas.width;
+		let image = context.getImageData(0, 0, size, size);
+		let imageData = image.data;
+		return { imageData, size };
+	}
+	drawImage() {
 		// Get the Image
 		let video = document.getElementById('video');
 		let canvas = document.getElementById('canvas');
@@ -80,10 +96,6 @@ class Capture extends React.Component {
 		let w = video.videoWidth;
 		let h = video.videoHeight;
 		context.drawImage(video, (w - h) / 2, 0, h, h, 0, 0, h, h);
-		let size = canvas.width;
-		let image = context.getImageData(0, 0, size, size);
-		let imageData = image.data;
-		return { imageData, size };
 	}
 	printImageData(imageData) {
 		// print to output
@@ -100,7 +112,7 @@ class Capture extends React.Component {
 	getClassifiedImageData(imageData) {
 		let X = this.imageDataToX(imageData);
 		let y = trainedModel.predict(X);
-		let {result, index} = y.maxDim("row");
+		let { result, index } = y.maxDim("row");
 		return index;
 	}
 	printClassifiedImageData(imageData) {
@@ -144,15 +156,34 @@ class Capture extends React.Component {
 		}
 		return scaled;
 	}
+	solve() {
+		console.log("changing page");
+	}
 
 	render() {
 		return (
 			<div id="main-content">
-				{this.makeVideo()}
-				<button id="capture-button" onClick={this.captureImage}>Capture</button>
-				<br></br>
-				<canvas id="canvas"></canvas>
-				<p id="output"></p>
+				<div id="capture-content">
+					<div id="video-content">
+						{this.makeVideo()}
+						<input type="image" id="capture-button" src="./screenshot.png" onClick={this.drawImage} />
+					</div>
+					<div id="output-content">
+						<canvas id="canvas"></canvas>
+						<p id="output"></p>
+						<div id="button-content">
+							<button id="use-button" onClick={this.useImage} disabled={this.state.sides.length >= 6}>Use</button>
+							<button id="remove-button" onClick={this.removeImage} disabled={this.state.sides.length == 0}>Back</button>
+						</div>
+					</div>
+				</div>
+				{/* <button id="solve-button" onClick={this.solve} disabled={this.state.sides.length != 6}>Solve</button> */}
+				<Link
+					to={{
+						pathname: "/solve",
+						state: { hi: true }
+					}}
+				>Solve</Link>
 			</div>
 		);
 	}

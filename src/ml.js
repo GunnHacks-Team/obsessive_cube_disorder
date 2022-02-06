@@ -150,7 +150,6 @@ export class Matrix {
 	}
 	maxFrequency() {
 		let result = new Matrix(1, 1);
-
 		let freq = {};
 		for (let i = 0; i < this.rows; i++) {
 			for (let j = 0; j < this.cols; j++) {
@@ -158,7 +157,6 @@ export class Matrix {
 				else freq[this.data[i][j]] = 1;
 			}
 		}
-
 		let max = 0;
 		let maxIndex = 0;
 		for (let i in freq) {
@@ -167,7 +165,6 @@ export class Matrix {
 				maxIndex = i;
 			}
 		}
-
 		result.data[0][0] = maxIndex;
 		return result;
 	}
