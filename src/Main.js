@@ -1,14 +1,10 @@
 import React from 'react';
-import Matrix from './ml.js';
 
 class Main extends React.Component {
-	constructor(props) {
-		super(props);
-	}
 	render() {
 		return (
-			<div className="main-content">
-				
+			<div id="main-content">
+				<a href="/capture">Capture</a>
 			</div>
 		);
 	}

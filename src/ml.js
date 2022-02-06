@@ -1,4 +1,4 @@
-class Matrix {
+export class Matrix {
 	constructor(rows, cols, defaultValue = 0, data = null) {
 		if (data == null) {
 			this.data = [];
@@ -187,6 +187,21 @@ class Matrix {
 				result += this.data[i][j];
 		return result / (this.rows * this.cols);
 	}
+	unravel() {
+		let result = [];
+		for (let i = 0; i < this.rows; i++)
+			for (let j = 0; j < this.cols; j++)
+				result.push(this.data[i][j]);
+		return result;
+	}
+	ravel(rows, cols) {
+		let result = new Matrix(rows, cols);
+		for (let i = 0; i < rows; i++)
+			for (let j = 0; j < cols; j++)
+				result.data[i][j] = this.data[0][i * cols + j];
+		return result;
+	}
+		
 	print(name = null) {
 		let out = "";
 		if (name != null) out += name + " " + this.data.length + "x" + this.data[0].length + ":\n";
@@ -199,23 +214,23 @@ class Matrix {
 	}
 }
 
-class MulticlassClassifier {
+export class MulticlassClassifier {
 	constructor(X, y, structure) {
 		/* Input:
-			X: rows: fearures, cols: samples
-			y: rows: 1, cols: samples
-			y(after): rows: classes, cols: samples
+		X: rows: fearures, cols: samples
+		y: rows: 1, cols: samples
+		y(after): rows: classes, cols: samples
 		*/
 		this.X = X;
 		this.y = y;
 		this.structure = structure;
-		if (this.structure[this.structure.length - 1] != this.y.rows)
+		if (this.y != null && this.structure[this.structure.length - 1] != this.y.rows)
 			throw new Error("Last layer size must be equal to number of classes");
 		this.A = [];
 		this.W = [];
 		this.B = [];
 		this.D = [];
-
+		
 		// initialize W and B
 		for (let i = 0; i < this.structure.length - 1; i++) {
 			this.W[i] = new Matrix(this.structure[i + 1], this.structure[i]);
@@ -271,34 +286,35 @@ class MulticlassClassifier {
 				mse += Math.pow(this.A[this.A.length - 1].data[i][j] - Y.data[i][j], 2);
 		return mse / (Y.rows * Y.cols);
 	}
-	printWeights() {
-		for (let i = 0; i < this.W.length; i++) {
-			this.W[i].print("W" + (i + 1));
-			this.B[i].print("B" + (i + 1));
-			this.D[i + 1].print("D" + (i + 1));
-			this.A[i].print("A" + (i + 1));
-		}
+	async loadParams() {
+		return new Promise((resolve, reject) => {
+			fetch('./weight.json')
+				.then(response => {
+					return response.json();
+				})
+				.then(data => {
+					this.setWeightData(data);
+					fetch('./bias.json')
+						.then(response => {
+							return response.json();
+						})
+						.then(data => {
+							this.setBiasData(data);
+							resolve();
+						});
+				});
+		});
 	}
-	
+	setWeightData(data) {
+		for (let i = 0; i < this.W.length; i++)
+			this.W[i] = new Matrix(null, null, null, data[i].data);
+	}
+	setBiasData(data) {
+		for (let i = 0; i < this.B.length; i++)
+			this.B[i] = new Matrix(null, null, null, data[i].data);
+	}
+	getWeightJSON() { return JSON.stringify(this.W); }
+	getBiasJSON() { return JSON.stringify(this.B); }
+	printWeightJSON() { console.log(this.getWeightJSON()); }
+	printBiasJSON() { console.log(this.getBiasJSON()); }
 }
-
-let X = new Matrix(null, null, null, [
-	[0, 0],
-	[0, 1],
-	[1, 0],
-	[1, 1]
-]);
-let y = new Matrix(null, null, null, [
-	[0],
-	[1],
-	[2],
-	[3]
-]);
-X = X.T();
-y = y.oneHot();
-y = y.T();
-let structure = [2, 5, 5, 4];
-let classifier = new MulticlassClassifier(X, y, structure);
-classifier.train(X, y);
-
-export default Matrix;
