@@ -1,7 +1,7 @@
 import React from 'react';
 import { Matrix, MulticlassClassifier } from '../ml.js';
 import trainedModel from '../training.js';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Capture extends React.Component {
 	constructor(props) {
@@ -156,9 +156,6 @@ class Capture extends React.Component {
 		}
 		return scaled;
 	}
-	solve() {
-		console.log("changing page");
-	}
 
 	render() {
 		return (
@@ -177,13 +174,22 @@ class Capture extends React.Component {
 						</div>
 					</div>
 				</div>
-				{/* <button id="solve-button" onClick={this.solve} disabled={this.state.sides.length != 6}>Solve</button> */}
 				<Link
+					style={{
+						// display
+						display: this.state.sides.length == 6 ? "block" : "none",
+					}}
 					to={{
 						pathname: "/solve",
-						state: { hi: true }
 					}}
-				>Solve</Link>
+					state={{
+						sides: this.state.sides,
+					}}
+				>
+					<button id="solve-button">
+						Solve
+					</button>
+				</Link>
 			</div>
 		);
 	}
