@@ -353,29 +353,6 @@ export class MulticlassClassifier {
 				mse += Math.pow(this.A[this.A.length - 1].data[i][j] - Y.data[i][j], 2);
 		return mse / (Y.rows * Y.cols);
 	}
-	// async loadParams() {
-	// 	return new Promise((resolve, reject) => {
-	// 		fetch('./weight.json')
-	// 			.then(response => {
-	// 				console.log("Getting weights: " + response.url);
-	// 				return response.json();
-	// 			})
-	// 			.then(data => {
-	// 				console.log("Got weights: " + data.length);
-	// 				this.setWeightData(data);
-	// 				fetch('./bias.json')
-	// 					.then(response => {
-	// 						console.log("Getting biases: " + response.url);
-	// 						return response.json();
-	// 					})
-	// 					.then(data => {
-	// 						console.log("Got biases: " + data.length);
-	// 						this.setBiasData(data);
-	// 						resolve();
-	// 					});
-	// 			});
-	// 	});
-	// }
 	loadParams(wegihtJSON, biasJSON) {
 		this.setWeightData(wegihtJSON);
 		this.setBiasData(biasJSON);
