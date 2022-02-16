@@ -5,9 +5,9 @@ import { rotationData, turnData } from './data/rotationData';
 import moveMaps from './data/moveMaps';
 
 class RubiksCube {
-  constructor(size) {
+  constructor(size, colors) {
     this.cubes = [];
-    this.colors = JSON.parse(JSON.stringify(COLORS));
+    this.colors = JSON.parse(JSON.stringify(colors));
     this.allMoves = [];
     let i = 0;
     for (let x = 0; x < 3; x++) {

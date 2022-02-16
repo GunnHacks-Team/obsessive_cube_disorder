@@ -11,14 +11,15 @@ import { COLORS } from "./data/colors";
 class RubiksCubeCanvas extends React.Component {
   constructor(props) {
     super(props);
-    this.rc = new RubiksCube(50, props.colors || COLORS);
-    this.rcv = new RubiksCubeVisual(50, props.colors);
+    const colors = (props.colors ? props.colors : COLORS);
+    console.log(props.colors);
+    console.log()
+    this.rc = new RubiksCube(50, colors);
+    this.rcv = new RubiksCubeVisual(50, colors);
   }
 
   async do(move) {
-    console.log("fdsa");
     await this.rcv.do(move);
-    console.log("hEhE");
   }
 
   getSolve() {
@@ -42,8 +43,8 @@ class RubiksCubeCanvas extends React.Component {
     // let safety = 0;
     // while (safety++ < 5000) {
 
-    let sc = this.rc.scramble(30);
-    console.log(sc);
+    // let sc = this.rc.scramble(30);
+    // console.log(sc);
 
     const cross = new Cross(this.rc);
     cross.solve();
@@ -62,7 +63,7 @@ class RubiksCubeCanvas extends React.Component {
     // }
 
     const moves = this.rc.getMoves();
-    for (let i = 0; i < 30; i++) this.rcv.do(sc[i]);
+    // for (let i = 0; i < 30; i++) this.rcv.do(sc[i]);
 
     window.onkeypress = e => {
       if (e.key === "n") this.do(moves.shift());

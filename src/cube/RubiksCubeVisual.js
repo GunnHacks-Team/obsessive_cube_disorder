@@ -4,10 +4,10 @@ import { COLORS } from "./data/colors";
 import Cube from "./Cube";
 
 class RubiksCubeVisual {
-  constructor(size) {
+  constructor(size, colors) {
     Object.assign(this, { size });
     this.cubes = [];
-    this.colors = JSON.parse(JSON.stringify(COLORS));
+    this.colors = JSON.parse(JSON.stringify(colors));
     this.currColors = JSON.parse(JSON.stringify(this.colors));
     this.rotations = [];
     let i = 0;
