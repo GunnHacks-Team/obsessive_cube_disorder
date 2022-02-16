@@ -1,70 +1,24 @@
-# Getting Started with Create React App
+# Inspiration
+- The pain of not being able to solve a Rubik's cube affects roughly 180 million people worldwide(No, this statistic was not purely made up). It might not be the most intense issue facing humanity in the modern age, but it certainly is both extremely widespread and very annoying.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# What it does
+- The goal was for it to do this: Given user-provided pictures of faces of their unsolved rubik's cubes, it uses machine learning to analyze and identify the colors on each of the squares and then shows the user the moves they need to perform on the cube to solve it.
 
-## Available Scripts
+# How we built it
+- We each worked on individual parts of the project, and at the end tried to consolidate them into one product.
 
-In the project directory, you can run:
+# Challenges we ran into
+- We are guilty of procrastination, and much of the project was done during the final stress-filled four hours. We also had many issues with getting the animations to work, hence the plethora of goofy cube footage within the video presentation.
 
-### `npm start`
+# Accomplishments that we're proud of
+- We're proud that we were each able to uphold our ends of the product, and come together at the end to have a mostly complete app despite its overall enormous complexity.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# What we learned
+- We learned an enormous amount about teamwork and time management(and the importance of sleep!). We also were also enlightened to new animation techniques, the wielding of AI, and the need for good training data.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# What's next for TBOER
+- The project is not finished at the moment, but it is roughly 70-80% complete. The final step would be to link the cube solving algorithm that the app generates with the animations. Of course, training the AI with more quality data would be helpful. Detailing the animations would also help the user more clearly see what they need to do to solve the cube.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Built With
+- javascript
+- machine-learning
