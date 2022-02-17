@@ -254,7 +254,7 @@ class Capture extends React.Component {
 
 	changeSquareColor(sideIndex, squqareIndex) {
 		let newSides = this.state.sides;
-		newSides[sideIndex][squqareIndex] = "" + (Number(newSides[sideIndex][squqareIndex]) + 1) % 7;
+		newSides[sideIndex][squqareIndex] = ""+(Number(newSides[sideIndex][squqareIndex]) + 1) % 7;
 		this.setState({ sides: newSides, });
 	}
 
@@ -280,24 +280,6 @@ class Capture extends React.Component {
 		);
 	}
 
-	makeEdit() {
-		const showEdit = (showing) => {
-			console.log(showing);
-			document.getElementById('showEdit').style.display = showing ? 'block' : 'none';
-		}
-		return (
-			<div id="edit">
-				Edit
-				<div id="edit-popup"
-					onMouseEnter={() => showEdit(true)}
-					onMouseLeave={() => showEdit(false)}
-				>
-					To edit a side, click on the squares.
-				</div>
-			</div>
-		);
-	}
-
 	// Render
 	render() {
 		return (
@@ -313,12 +295,11 @@ class Capture extends React.Component {
 						<canvas id="outputImage" className="box"></canvas>
 						<button className="ocd-button" onClick={this.useButton} disabled={this.state.focusedSide >= 6}>Use</button>
 					</div>
-					{/* Edit */}
+					{/* Discard */}
 					<div className="box-holder">
 						<div id="classifiedOutputImage" className="box">
 							{this.makeSide()}
 						</div>
-						{this.makeEdit()}
 					</div>
 				</div>
 				<p id="output"></p>

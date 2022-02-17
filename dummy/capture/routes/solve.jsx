@@ -22,7 +22,7 @@ export default function Solve() {
 
 	console.log("parsedSides", parsedSides);
 	return (
-		<div id="solve-content">
+		<div>
 			{rc}
 		</div>
 	);
