@@ -1,6 +1,6 @@
 export class Matrix {
 	constructor(rows, cols, defaultValue = 0, data = null) {
-		if (data == null) {
+		if (data === null) {
 			this.data = [];
 			for (let i = 0; i < rows; i++) {
 				this.data.push([]);
@@ -14,7 +14,7 @@ export class Matrix {
 		this.cols = this.data[0].length;
 	}
 	equalDimensions(other) {
-		return this.rows == other.rows && this.cols == other.cols;
+		return this.rows === other.rows && this.cols === other.cols;
 	}
 	get(index) {
 		return this.data[Math.floor(index / this.cols)][index % this.cols];
@@ -75,7 +75,7 @@ export class Matrix {
 	}
 	dot(other) {
 		if (other instanceof Matrix) {
-			if (this.cols != other.rows)
+			if (this.cols !== other.rows)
 				throw new Error("Matrix dimensions must be compatible for dot product: " + this.rows + "x" + this.cols + " vs " + other.rows + "x" + other.cols);
 			let result = new Matrix(this.rows, other.cols);
 			for (let i = 0; i < this.rows; i++)
@@ -88,17 +88,17 @@ export class Matrix {
 	}
 	addVector(other) {
 		if (other instanceof Matrix) {
-			if (other.rows == 1 && this.cols == other.cols) {
+			if (other.rows === 1 && this.cols === other.cols) {
 				let result = new Matrix(this.rows, this.cols);
 				for (let i = 0; i < this.rows; i++)
-				for (let j = 0; j < this.cols; j++)
-				result.data[i][j] = this.data[i][j] + other.data[0][j];
+					for (let j = 0; j < this.cols; j++)
+						result.data[i][j] = this.data[i][j] + other.data[0][j];
 				return result;
-			} else if (other.cols == 1 && this.rows == other.rows) {
+			} else if (other.cols === 1 && this.rows === other.rows) {
 				let result = new Matrix(this.rows, this.cols);
 				for (let i = 0; i < this.rows; i++)
-				for (let j = 0; j < this.cols; j++)
-				result.data[i][j] = this.data[i][j] + other.data[i][0];
+					for (let j = 0; j < this.cols; j++)
+						result.data[i][j] = this.data[i][j] + other.data[i][0];
 				return result;
 			}
 			throw new Error("Matrix dimensions must be compatible for matrix-vector addition: " + this.rows + "x" + this.cols + " vs " + other.rows + "x" + other.cols);
@@ -120,7 +120,7 @@ export class Matrix {
 		return max;
 	}
 	maxDim(dim) {
-		if (dim == "row") {
+		if (dim === "row") {
 			// return the max along each collumn
 			let result = new Matrix(1, this.cols);
 			let index = new Matrix(1, this.cols);
@@ -133,7 +133,7 @@ export class Matrix {
 				}
 			}
 			return { result, index };
-		} else if (dim == "col") {
+		} else if (dim === "col") {
 			// return the max along each row
 			let result = new Matrix(this.rows, 1);
 			let index = new Matrix(this.rows, 1);
@@ -168,17 +168,17 @@ export class Matrix {
 		result.data[0][0] = maxIndex;
 		return result;
 	}
-		
+
 
 
 	oneHot() {
 		let max = Number(this.max()) + 1;
-		if (this.rows == 1) {
+		if (this.rows === 1) {
 			let result = new Matrix(max, this.cols);
 			for (let i = 0; i < this.cols; i++)
 				result.data[this.data[0][i]][i] = 1;
 			return result;
-		} else if (this.cols == 1) {
+		} else if (this.cols === 1) {
 			let result = new Matrix(this.rows, max);
 			for (let i = 0; i < this.rows; i++)
 				result.data[i][this.data[i][0]] = 1;
@@ -187,14 +187,14 @@ export class Matrix {
 		throw new Error("Cannot convert matrix to one-hot vector");
 	}
 	sum(axis) {
-		if (axis == "row") {
+		if (axis === "row") {
 			// collapse all of the rows into a single vector into shape (1, cols)
 			let result = new Matrix(1, this.cols);
 			for (let i = 0; i < this.cols; i++)
 				for (let j = 0; j < this.rows; j++)
 					result.data[0][i] += this.data[j][i];
 			return result;
-		} else if (axis == "col") {
+		} else if (axis === "col") {
 			// collapse all of the columns into a single vector into shape (rows, 1)
 			let result = new Matrix(this.rows, 1);
 			for (let i = 0; i < this.rows; i++)
@@ -249,7 +249,7 @@ export class Matrix {
 		return result;
 	}
 	reshape(rows, cols) {
-		if (rows * cols != this.rows * this.cols)
+		if (rows * cols !== this.rows * this.cols)
 			throw new Error("Cannot reshape matrix to " + rows + "x" + cols + " from " + this.rows + "x" + this.cols);
 		let result = new Matrix(rows, cols);
 		for (let i = 0; i < rows; i++) {
@@ -268,7 +268,7 @@ export class Matrix {
 	}
 	print(name = null) {
 		let out = "";
-		if (name != null) out += name + " " + this.rows + "x" + this.cols + ":\n";
+		if (name !== null) out += name + " " + this.rows + "x" + this.cols + ":\n";
 		else out += "Matrix " + this.rows + "x" + this.cols + ":\n";
 		for (let i = 0; i < this.rows; i++) {
 			for (let j = 0; j < this.cols; j++) out += this.data[i][j] + " ";
@@ -288,13 +288,13 @@ export class MulticlassClassifier {
 		this.X = X;
 		this.y = y;
 		this.structure = structure;
-		if (this.y != null && this.structure[this.structure.length - 1] != this.y.rows)
-			throw new Error("Last layer size must be equal to number of classes: " + this.structure[this.structure.length - 1] + " != " + this.y.rows);
+		if (this.y !== null && this.structure[this.structure.length - 1] !== this.y.rows)
+			throw new Error("Last layer size must be equal to number of classes: " + this.structure[this.structure.length - 1] + " !== " + this.y.rows);
 		this.A = [];
 		this.W = [];
 		this.B = [];
 		this.D = [];
-		
+
 		// initialize W and B
 		for (let i = 0; i < this.structure.length - 1; i++) {
 			this.W[i] = new Matrix(this.structure[i + 1], this.structure[i]);
@@ -338,7 +338,7 @@ export class MulticlassClassifier {
 			this.forward(X);
 			this.backward(Y);
 			this.update();
-			if (i % 100 == 0) {
+			if (i % 100 === 0) {
 				console.log("Epoch " + i + ": " + this.mse(Y));
 			}
 		}

@@ -1,6 +1,5 @@
 import cubeFaceData from "./data/cubeFaceData";
 import { rotationData } from "./data/rotationData";
-import { COLORS } from "./data/colors";
 import Cube from "./Cube";
 
 class RubiksCubeVisual {
@@ -87,7 +86,7 @@ class RubiksCubeVisual {
   draw(p5) {
     if (this.rotations.length) {
       this.rotations[0].curr += 0.05;
-      const { axis, pos, curr, goalAngle, res, rej } = this.rotations[0];
+      const { axis, pos, curr, goalAngle, res } = this.rotations[0];
       for (const cube of this.cubes) {
         if (cube[axis] !== pos) continue;
         if (curr >= 1) cube.rotate(axis, 0);

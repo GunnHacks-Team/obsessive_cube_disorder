@@ -23,7 +23,7 @@ class Capture extends React.Component {
 
 	// Getters
 	getFilledSides() {
-		return this.state.sides.map(side => side != null ? 1 : 0).reduce((a, b) => a + b, 0)
+		return this.state.sides.map(side => side !== null ? 1 : 0).reduce((a, b) => a + b, 0)
 	}
 
 
@@ -81,7 +81,7 @@ class Capture extends React.Component {
 
 	// Progress
 	progressCircleButton(index) {
-		if (index > this.getFilledSides() || index == this.state.focusedSide) return;
+		if (index > this.getFilledSides() || index === this.state.focusedSide) return;
 		this.setState({
 			focusedSide: index,
 		});
@@ -103,7 +103,7 @@ class Capture extends React.Component {
 		const circles = ["F", "L", "B", "R", "U", "D"];
 		const size = this.getFilledSides();
 		const progressCircleBackgroundColor = (index) => (index < size) ? this.greenColor : "black";
-		const progressCircleBorderColor = (index) => (index == this.state.focusedSide) ? "yellow" : "black";
+		const progressCircleBorderColor = (index) => (index === this.state.focusedSide) ? "yellow" : "black";
 		const progressCircleLetterColor = (index) => (index < size) ? "black" : "white";
 		return (
 			<div id="progress-circles">
@@ -225,7 +225,7 @@ class Capture extends React.Component {
 	updateOutputImage(imageData) {
 		let ouutputImage = document.getElementById('outputImage');
 		let context = ouutputImage.getContext('2d');
-		if (imageData == null) {
+		if (imageData === null) {
 			context.clearRect(0, 0, ouutputImage.width, ouutputImage.height);
 		} else {
 			context.putImageData(imageData, 0, 0);
@@ -233,7 +233,7 @@ class Capture extends React.Component {
 	}
 	makeSide() {
 		const side = this.state.sides[this.state.focusedSide];
-		if (side == null) return;
+		if (side === null) return;
 		const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'black', 'white'];
 		const squareToColor = (square) => colors[square];
 		return (
@@ -254,7 +254,7 @@ class Capture extends React.Component {
 
 	changeSquareColor(sideIndex, squqareIndex) {
 		let newSides = this.state.sides;
-		newSides[sideIndex][squqareIndex] = ""+(Number(newSides[sideIndex][squqareIndex]) + 1) % 7;
+		newSides[sideIndex][squqareIndex] = "" + (Number(newSides[sideIndex][squqareIndex]) + 1) % 7;
 		this.setState({ sides: newSides, });
 	}
 
