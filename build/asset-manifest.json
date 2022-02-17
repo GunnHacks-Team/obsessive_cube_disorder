@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/obsessive_cube_disorder/static/css/main.13007c1f.css",
+    "main.js": "/obsessive_cube_disorder/static/js/main.0026b25a.js",
+    "index.html": "/obsessive_cube_disorder/index.html",
+    "main.13007c1f.css.map": "/obsessive_cube_disorder/static/css/main.13007c1f.css.map",
+    "main.0026b25a.js.map": "/obsessive_cube_disorder/static/js/main.0026b25a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.13007c1f.css",
+    "static/js/main.0026b25a.js"
+  ]
+}

@@ -8,6 +8,7 @@ class RubiksCubeCanvas extends React.Component {
     super(props);
     const colors = (props.colors ? props.colors : COLORS);
     this.rcv = new RubiksCubeVisual(50, colors);
+    this.canvas = <Sketch setup={this.setup} draw={this.draw} />;
   }
 
   async do(move) {
@@ -34,7 +35,7 @@ class RubiksCubeCanvas extends React.Component {
     this.rcv.draw(p5);
   };
 
-  getCanvas() { return <Sketch setup={this.setup} draw={this.draw} />; }
+  getCanvas() { return this.canvas; }
 }
 
 export default RubiksCubeCanvas;
