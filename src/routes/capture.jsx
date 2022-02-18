@@ -1,8 +1,7 @@
 import React from 'react';
-import { Matrix, MulticlassClassifier } from '../ml.js';
-import trainedModel from '../training.js';
+import { Matrix } from '../ml/network.js';
+import trainedModel from '../ml/training.js';
 import { Link } from 'react-router-dom';
-import ClassifiedSquare from '../ClassifiedSquare.js';
 
 class Capture extends React.Component {
 	// Constructor

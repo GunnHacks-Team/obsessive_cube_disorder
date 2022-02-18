@@ -4,14 +4,14 @@ class Main extends React.Component {
 	render() {
 		return (
 			<div id="main-content">
-				<img src={require("./cubes.png")}
+				<img src={require("../images/cubes.png")}
 					style={{
 						width: "100%",
 						position: "absolute",
 						top: "-100px"
 					}}
 				></img>
-				<img src={require("./lambda.png")}
+				<img src={require("../images/lambda.png")}
 					style={{
 						width: "50%",
 						position: "absolute",

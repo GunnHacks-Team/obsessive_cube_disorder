@@ -1,4 +1,4 @@
-import {Matrix, MulticlassClassifier} from "./ml.js";
+import {MulticlassClassifier} from "./network.js";
 import weight from "./weight.json";
 import bias from "./bias.json";
 

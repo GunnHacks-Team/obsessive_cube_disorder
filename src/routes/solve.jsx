@@ -18,7 +18,8 @@ export default function Solve() {
 
 	const rc = new RubiksCube(parsedSides);
 	const solve = rc.getMoves();
-	console.log(solve);
+	console.log("Sides: ", parsedSides);
+	console.log("Can Solve?: ", solve);
 	window.onkeydown = e => {
 		if (e.key === 'n') rc.next();
 		if (e.key === 'p') rc.prev();
