@@ -1,25 +1,24 @@
-import Cube from './Cube';
-import { COLORS } from './data/colors';
-import cubeFaceData from './data/cubeFaceData';
+// import Cube from './Cube';
+// import cubeFaceData from './data/cubeFaceData';
 import { rotationData, turnData } from './data/rotationData';
 import moveMaps from './data/moveMaps';
 
-class RubiksCube {
-  constructor(size, colors) {
+class RubiksCubeVirtual {
+  constructor(colors) {
     this.cubes = [];
     this.colors = JSON.parse(JSON.stringify(colors));
     this.allMoves = [];
-    let i = 0;
-    for (let x = 0; x < 3; x++) {
-      for (let y = 0; y < 3; y++) {
-        for (let z = 0; z < 3; z++) {
-          const faces = ["front", "back", "up", "down", "left", "right"];
-          const cubeFaces = cubeFaceData[i].map((pos, ind) => ({ face: faces[ind], pos }));
-          this.cubes.push(new Cube(x, y, z, size / 3, cubeFaces));
-          i++;
-        }
-      }
-    }
+    // let i = 0;
+    // for (let x = 0; x < 3; x++) {
+    //   for (let y = 0; y < 3; y++) {
+    //     for (let z = 0; z < 3; z++) {
+    //       const faces = ["front", "back", "up", "down", "left", "right"];
+    //       const cubeFaces = cubeFaceData[i].map((pos, ind) => ({ face: faces[ind], pos }));
+    //       this.cubes.push(new Cube(x, y, z, 50 / 3, cubeFaces));
+    //       i++;
+    //     }
+    //   }
+    // }
   }
 
   remTurns(arr) {
@@ -226,4 +225,4 @@ class RubiksCube {
   }
 }
 
-export default RubiksCube;
+export default RubiksCubeVirtual;

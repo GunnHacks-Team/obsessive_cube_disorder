@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom'
-import RubiksCubeCanvas from '../cube/RubiksCubeCanvas.js';
+import RubiksCube from '../cube/RubiksCube';
 
 export default function Solve() {
 	const location = useLocation();
@@ -16,14 +16,17 @@ export default function Solve() {
 	const colors = ['r', 'o', 'y', 'g', 'b', 'l', 'w'];
 	for (const side in parsedSides) parsedSides[side] = parsedSides[side].map(square => colors[square]);
 
-	const rc = <RubiksCubeCanvas colors={parsedSides} />;
-	// const solve = rc.getSolve();
-	// console.log(solve);
+	const rc = new RubiksCube(parsedSides);
+	const solve = rc.getMoves();
+	console.log(solve);
+	window.onkeydown = e => {
+		if (e.key === 'n') rc.next();
+		if (e.key === 'p') rc.prev();
+	};
 
-	console.log("parsedSides", parsedSides);
 	return (
 		<div id="solve-content">
-			{rc}
+			{rc.getCanvas()}
 		</div>
 	);
 };
