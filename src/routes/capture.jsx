@@ -296,6 +296,17 @@ class Capture extends React.Component {
 			</div>
 		);
 	}
+	getButton(color, text, onclick, disabled) {
+		return (
+			<button
+				className="ocd-button"
+				onClick={onclick}
+				disabled={disabled}
+			>
+				{text}
+			</button>
+		);
+	}
 
 	// Render
 	render() {
@@ -305,7 +316,8 @@ class Capture extends React.Component {
 					{/* Capture */}
 					<div className="box-holder">
 						{this.ocdVideo()}
-						<button className="ocd-button" onClick={this.captureButton}>Capture</button>
+						{/* <button className="ocd-button" onClick={this.captureButton}>Capture</button> */}
+						{this.getButton('purple', 'Capture', this.captureButton, false)}
 					</div>
 					{/* Use */}
 					<div className="box-holder">

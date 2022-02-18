@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './output.css';
 import Main from './routes/Main';
 import Capture from './routes/Capture';
 import Solve from './routes/Solve';

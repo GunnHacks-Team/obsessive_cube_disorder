@@ -15,10 +15,10 @@ class RubiksCube {
   getCanvas() { return this.canvas.getCanvas(); }
 
   getMoves() {
-    // if (!(new Cross(this.rc)).solve()) return false;
-    // if (!(new F2L(this.rc)).solve()) return false;
-    // if (!(new OLL(this.rc)).solve()) return false;
-    // if (!(new PLL(this.rc)).solve()) return false;
+    if (!(new Cross(this.rc)).solve()) {}//return false;
+    if (!(new F2L(this.rc)).solve()) {}//return false;
+    if (!(new OLL(this.rc)).solve()) {}//return false;
+    if (!(new PLL(this.rc)).solve()) {}//return false;
     this.moves = this.rc.getMoves();
 	console.log(this.moves);
     return this.moves;
