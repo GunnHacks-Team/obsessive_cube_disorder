@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Main from './routes/Main';
-import Capture from './routes/Capture';
-import Solve from './routes/Solve';
+import Capture from './routes/capture';
+import Solve from './routes/solve';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 ReactDOM.render(

@@ -10,24 +10,25 @@ class RubiksCube {
     const c = colors ? colors : COLORS;
     this.rc = new RubiksCubeVirtual(c);
     this.canvas = new RubiksCubeCanvas(50, c);
+    this.movePos = 0;
   }
 
   getCanvas() { return this.canvas.getCanvas(); }
 
   getMoves() {
-    // if (!(new Cross(this.rc)).solve()) return false;
-    // if (!(new F2L(this.rc)).solve()) return false;
-    // if (!(new OLL(this.rc)).solve()) return false;
-    // if (!(new PLL(this.rc)).solve()) return false;
+    if (!(new Cross(this.rc)).solve()) return false;
+    if (!(new F2L(this.rc)).solve()) return false;
+    if (!(new OLL(this.rc)).solve()) { } // return false;
+    if (!(new PLL(this.rc)).solve()) return false;
     this.moves = this.rc.getMoves();
-	console.log(this.moves);
+    console.log(this.moves);
     return this.moves;
   }
 
   async next() {
     const move = this.moves[this.movePos++];
     this.rc.do(move);
-    this.rcc.do(move);
+    this.canvas.do(move);
   }
 
   async prev() {
@@ -35,7 +36,7 @@ class RubiksCube {
     if (move[1] === "'") move = move[0];
     else if (!move[1]) move += "'";
     this.rc.do(move);
-    this.rcc.do(move);
+    this.canvas.do(move);
   }
 }
 

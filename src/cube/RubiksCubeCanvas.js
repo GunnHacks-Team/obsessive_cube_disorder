@@ -1,13 +1,10 @@
 import React from "react";
 import Sketch from "react-p5";
 import RubiksCubeVisual from "./RubiksCubeVisual";
-import { COLORS } from "./data/colors";
 
-class RubiksCubeCanvas extends React.Component {
-  constructor(props) {
-    super(props);
-    const colors = (props.colors ? props.colors : COLORS);
-    this.rcv = new RubiksCubeVisual(50, colors);
+class RubiksCubeCanvas {
+  constructor(size, colors) {
+    this.rcv = new RubiksCubeVisual(size, colors);
     this.canvas = <Sketch setup={this.setup} draw={this.draw} />;
   }
 
