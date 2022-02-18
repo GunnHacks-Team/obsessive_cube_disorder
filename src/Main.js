@@ -4,14 +4,21 @@ class Main extends React.Component {
 	render() {
 		return (
 			<div id="main-content">
-				<img src={require("./homePage_2.png")}
-					sytle={{
+				<img src={require("./cubes.png")}
+					style={{
 						width: "100%",
-						position: "fixed",
-						top:0
+						position: "absolute",
+						top: "-100px"
 					}}
-				>
-				</img>
+				></img>
+				<img src={require("./lambda.png")}
+					style={{
+						width: "50%",
+						position: "absolute",
+						top: "750px",
+						right: "-100px"
+					}}
+				></img>
 				<a className="main-text" href="/capture"
 					style={{
 						position: 'absolute',
