@@ -219,10 +219,10 @@ class RubiksCubeVirtual {
     }
   }
 
-  draw(p5) {
-    for (const cube of this.cubes) cube.draw(this.colors, p5);
-    // this.cube.draw(p5);
-  }
+  // draw(p5) {
+  //   for (const cube of this.cubes) cube.draw(this.colors, p5);
+  //   // this.cube.draw(p5);
+  // }
 }
 
 export default RubiksCubeVirtual;
