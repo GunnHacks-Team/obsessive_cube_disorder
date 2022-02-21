@@ -89,9 +89,7 @@ class RubiksCubeVirtual {
       }
       miniArr.sort();
       newArr.push(...miniArr);
-      console.log(i, miniArr, newArr);
     }
-    console.log(newArr);
     return newArr;
   }
 

@@ -17,9 +17,7 @@ export default function Solve() {
 	for (const side in parsedSides) parsedSides[side] = parsedSides[side].map(square => colors[square]);
 
 	const rc = new RubiksCube(parsedSides);
-	const solve = rc.getMoves();
-	console.log("Sides: ", parsedSides);
-	console.log("Can Solve?: ", solve);
+	rc.solve();
 	window.onkeydown = e => {
 		if (e.key === 'n') rc.next();
 		if (e.key === 'p') rc.prev();

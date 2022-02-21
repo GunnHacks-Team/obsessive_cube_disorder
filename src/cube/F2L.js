@@ -62,7 +62,10 @@ class F2L {
 
       this.cube.do("Y");
     }
+  }
 
+  sol() {
+    this.solve();
     return this.isSolved();
   }
 }

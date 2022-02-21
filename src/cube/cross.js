@@ -1,9 +1,20 @@
-const algs = [
-  { face: "front", pos: 1, moves: "F D R'" },
-  { face: "front", pos: 5, moves: "D R'" },
-  { face: "front", pos: 7, moves: "F' D R'" },
-  { face: "right", pos: 3, moves: "F" },
-  { face: "up", pos: 7, moves: "F2" },
+const CROSS_ALGS = [
+  {
+    edge: [{ face: "up", pos: 7 }, { face: "front", pos: 1 }],
+    moves: "F2",
+  },
+  {
+    edge: [{ face: "front", pos: 1 }, { face: "up", pos: 7 }],
+    moves: "F D R' D'",
+  },
+  {
+    edge: [{ face: "right", pos: 3 }, { face: "front", pos: 5 }],
+    moves: "F",
+  },
+  {
+    edge: [{ face: "front", pos: 5 }, { face: "right", pos: 3 }],
+    moves: "D R' D'",
+  },
 ];
 
 class Cross {
@@ -13,47 +24,58 @@ class Cross {
   }
 
   isSolved() {
-    return this.isCross() && this.matches() === 4;
-  }
-
-  isCross() {
-    let ans = 0;
-    for (const pos of [1, 3, 5, 7]) {
-      if (this.cube.colors.down[pos] === this.dc) ans++;
-    }
-    return ans === 4;
-  }
-
-  matches() {
-    let ans = 0;
     for (let i = 0; i < 4; i++) {
-      if (this.cube.colors.front[7] === this.cube.colors.front[4]) ans++;
+      if (!(
+        this.cube.colors.front[7] === this.cube.colors.front[4] &&
+        this.cube.colors.down[1] === this.dc
+      )) return false;
       this.cube.do('Y');
     }
-    return ans;
+    return true;
+  }
+
+  eq(a, b) {
+    for (const x of a) if (!b.includes(x)) return false;
+    return true;
+  }
+
+  ex(a, b) {
+    for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false;
+    return true;
   }
 
   solve() {
-    while (!this.isCross()) {
-      for (const alg of algs) {
-        const { face, pos, moves } = alg;
-        if (this.cube.colors[face][pos] === this.dc) {
-          while (this.cube.colors.down[1] === this.dc) this.cube.do("D");
-          this.cube.do(moves);
+    for (let i = 0; i < 4; i++) {
+      const fc = this.cube.colors.front[4];
+      let brk = false;
+      for (let k = 0; k < 4; k++) {
+        if (this.eq(
+          [this.cube.colors.front[7], this.cube.colors.down[1]],
+          [this.dc, fc]
+        )) this.cube.do("F'");
+
+        for (const alg of CROSS_ALGS) {
+          const { edge, moves } = alg;
+          if (this.ex(edge.map(f => this.cube.colors[f.face][f.pos]), [this.dc, fc])) {
+            for (let l = 0; l < k; l++) this.cube.do("D");
+            this.cube.do(moves);
+            for (let l = 0; l < k; l++) this.cube.do("D'");
+            for (let l = 0; l < k; l++) this.cube.do("Y'");
+            brk = true; break;
+          }
         }
+
+        if (brk) break;
+        this.cube.do("Y");
       }
-      this.cube.do('Y');
+      this.cube.do("Y");
     }
+  }
 
-    while (this.matches() < 2) this.cube.do('D');
-    if (this.matches() !== 4) {
-      while (this.cube.colors.front[7] === this.cube.colors.front[4]) this.cube.do('Y');
-      if (this.cube.colors.back[7] !== this.cube.colors.back[4]) this.cube.do("R2 L2 D2 R2 L2");
-      else if (this.cube.colors.right[7] !== this.cube.colors.right[4]) this.cube.do("X2 R U R' U' R X2");
-      else this.cube.do("Y' X2 R U R' U' R X2");
-    }
-
+  sol() {
+    this.solve();
     return this.isSolved();
+    // return true;
   }
 }
 
