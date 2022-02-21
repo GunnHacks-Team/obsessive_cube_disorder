@@ -46,11 +46,12 @@ class Cross {
     }
 
     while (this.matches() < 2) this.cube.do('D');
-    if (this.matches() === 4) return;
-    while (this.cube.colors.front[7] === this.cube.colors.front[4]) this.cube.do('Y');
-    if (this.cube.colors.back[7] !== this.cube.colors.back[4]) this.cube.do("R2 L2 D2 R2 L2");
-    else if (this.cube.colors.right[7] !== this.cube.colors.right[4]) this.cube.do("X2 R U R' U' R X2");
-    else this.cube.do("Y' X2 R U R' U' R X2");
+    if (this.matches() !== 4) {
+      while (this.cube.colors.front[7] === this.cube.colors.front[4]) this.cube.do('Y');
+      if (this.cube.colors.back[7] !== this.cube.colors.back[4]) this.cube.do("R2 L2 D2 R2 L2");
+      else if (this.cube.colors.right[7] !== this.cube.colors.right[4]) this.cube.do("X2 R U R' U' R X2");
+      else this.cube.do("Y' X2 R U R' U' R X2");
+    }
 
     return this.isSolved();
   }
