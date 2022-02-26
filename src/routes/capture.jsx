@@ -2,6 +2,7 @@ import React from 'react';
 import { Matrix } from '../ml/network.js';
 import trainedModel from '../ml/training.js';
 import { Link } from 'react-router-dom';
+import Button from '../components/Button.jsx';
 
 class Capture extends React.Component {
 	// Constructor
@@ -245,54 +246,43 @@ class Capture extends React.Component {
 		const linkTextDecoration = size < 6 ? 'line-through' : 'none';
 		const linkOpacity = size < 6 ? 0.5 : 1;
 		return (
-			<Link to={{ pathname: "/solve", }} state={{ sides: this.state.sides, }}
+			<Link to={{ pathname: "/solve", }} state={{ sides: this.state.sides, }} className="text-white mb-[3vw]"
 				style={{
 					pointerEvents: linkPointerEvents,
 					textDecoration: linkTextDecoration,
 					opacity: linkOpacity,
-					color: '#fff'
 				}}
 			>
-				{this.getButton("green", "Solve", null, false)}
+				<Button textColor="white" bgColor="yellow" size="medium">Solve</Button>
 			</Link>
-		);
-	}
-	getButton(textColor, text, onclick, disabled) {
-		// let textColor = "text-" + color;
-		return (
-			<button
-				className={"text-white text-[1.5vw] py-[0.5vw] px-[1vw] m-[1vw] border-[0.3vw] border-emerald-400 rounded bg-transparent hover:bg-emerald-400 transition-colors duration-150"}
-				onClick={onclick}
-				disabled={disabled}
-			>
-				{text}
-			</button>
 		);
 	}
 	getEdit() {
 		return (
-			<div className="group text-white text-[1.5vw] py-[0.5vw] px-[1vw] m-[1vw] flex items-center relative mx-[0.5vw] hover:text-gray-300 transition-all duration-200">
-				<p className="underline decoration-[0.15vw] hover:decoration-[0.2vw]">Edit</p>
-				<p className="absolute text-[1.3vw] left-[5vw] w-[10vw] opacity-0 group-hover:opacity-100 bg-gray-500 transition-opacity duration-100">To edit a square, click on it.</p>
-			</div>
+			<Button classes="group flex items-center relative underline cursor-help hover:decoration-[0.2vw]" textColor="white" bgColor="none" size="medium">
+				Edit
+				<p className="absolute text-[1.3vw] left-[5vw] w-[10vw] bg-gray-500 rounded-[0.5vw] pointer-events-none opacity-0 group-hover:opacity-90 transition-all duration-100">
+					To edit a square, click on it.
+				</p>
+			</Button>
 		);
 	}
 
 	// Render
 	render() {
 		return (
-			<div id="main-content" className="flex flex-col items-center relative m-[1vw]">
+			<div className="flex flex-col items-center relative w-full h-[100vh] bg-gradient-to-b from-zinc-700 via-zinc-800 to-zinc-900">
 				<p className="text-white text-[3vw] m-[1vw]">Cube Data Collection</p>
 				<div id="capture-content">
 					{/* Capture */}
 					<div className="box-holder">
 						{this.ocdVideo()}
-						{this.getButton('purple', 'Capture', this.captureButton, false)}
+						<Button textColor="white" bgColor="purple" size="medium" onclick={this.captureButton} disabled={false}>Capture</Button>
 					</div>
 					{/* Use */}
 					<div className="box-holder">
 						<canvas id="outputImage" className="box"></canvas>
-						{this.getButton('green', 'Use', this.useButton, this.state.focusedSide >= 6)}
+						<Button textColor="white" bgColor="green" size="medium" onclick={this.useButton} disabled={this.state.focusedSide >= 6}>Use</Button>
 					</div>
 					{/* Edit */}
 					<div className="box-holder">
@@ -303,7 +293,7 @@ class Capture extends React.Component {
 					</div>
 				</div>
 				<p id="output"></p>
-				<div id="progress-container" className="w-[75vw] h-[3vw] m-[2vw] mt-[9vw] bg-zinc-800 rounded-full relative">
+				<div id="progress-container" className="w-[75vw] h-[3vw] m-[4vw] bg-zinc-800 rounded-full relative">
 					{this.createProgressBar()}
 					{this.createProgressCircles()}
 				</div>
