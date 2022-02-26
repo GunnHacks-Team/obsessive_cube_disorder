@@ -79,12 +79,27 @@ class RubiksCubeVirtual {
     return newArr;
   }
 
+  reorder(arr) {
+    let newArr = [];
+    for (let i = 0; i < arr.length;) {
+      let miniArr = [], currAxis = rotationData[arr[i][0]].axis;
+      while (i < arr.length && rotationData[arr[i][0]].axis === currAxis) {
+        miniArr.push(arr[i]);
+        i++;
+      }
+      miniArr.sort();
+      newArr.push(...miniArr);
+    }
+    return newArr;
+  }
+
   getMoves() {
     this.allMoves = this.rem4(this.allMoves);
     this.allMoves = this.rem3(this.allMoves);
     this.allMoves = this.rem2(this.allMoves);
     this.allMoves = this.remTurns(this.allMoves);
 
+    this.allMoves = this.reorder(this.allMoves);
     this.allMoves = this.rem4(this.allMoves);
     this.allMoves = this.rem3(this.allMoves);
     this.allMoves = this.rem2(this.allMoves);

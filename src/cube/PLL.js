@@ -31,18 +31,21 @@ class PLL {
   solve() {
     for (const pllAlg of PLL_ALGS) {
       const { perm, alg } = pllAlg;
-      let b = false;
+      let done = false;
       for (let i = 0; i < 4; i++) {
         if (this.eq(perm)) {
           this.cube.do(alg);
-          b = true; break;
+          done = true;
         }
         this.cube.do("Y");
       }
-      if (b) break;
+      if (done) break;
     }
     while (this.cube.colors.front[4] !== this.cube.colors.front[0]) this.cube.do("U");
+  }
 
+  sol() {
+    this.solve();
     return this.isSolved();
   }
 }

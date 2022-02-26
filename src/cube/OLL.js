@@ -33,20 +33,20 @@ class OLL {
   }
 
   solve() {
-    let brk = false;
     for (const alg of OLL_ALGS) {
       const { pattern: { face, adj }, alg: moves } = alg;
       for (let i = 0; i < 4; i++) {
         if (this.adjEq(adj) && this.faceEq(face)) {
           this.cube.do(moves);
-          brk = true;
-          break;
+          return;
         }
         this.cube.do("Y");
       }
-      if (brk) break;
     }
+  }
 
+  sol() {
+    this.solve();
     return this.isSolved();
   }
 }
