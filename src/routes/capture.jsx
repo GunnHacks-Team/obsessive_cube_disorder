@@ -28,7 +28,6 @@ class Capture extends React.Component {
 		document.removeEventListener("keydown", this.handleKeyDown);
 	}
 	handleKeyDown(event) {
-		console.log("Key pressed: " + event.key);
 		if (event.repeat) return;
 		else if (event.key === "Enter") { this.useButton(); }
 		else if (event.key === "Shift") { this.captureButton(); }
