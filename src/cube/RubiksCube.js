@@ -49,14 +49,14 @@ class RubiksCube {
 
   async next() {
     const move = this.moves[this.movePos++];
-    this.canvas.do(move);
+    await this.canvas.do(move);
   }
 
   async prev() {
     let move = this.moves[--this.movePos];
     if (move[1] === "'") move = move[0];
     else if (!move[1]) move += "'";
-    this.canvas.do(move);
+    await this.canvas.do(move);
   }
 }
 

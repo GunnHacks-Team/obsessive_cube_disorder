@@ -1,8 +1,8 @@
 import React from 'react';
-import { Matrix } from '../ml/network.js';
-import trainedModel from '../ml/training.js';
+import { Matrix } from '../ml/network';
+import trainedModel from '../ml/training';
 import { Link } from 'react-router-dom';
-import Button from '../components/Button.jsx';
+import Button from '../components/Button';
 
 class Capture extends React.Component {
 	// Constructor
