@@ -27,9 +27,7 @@ export default function Solve() {
 					style={{ transform: `translateX(calc(50% - calc(5vw + calc(14vw * ${moveIndex}))))`, overflow: 'clip' }}>
 					{moves.map((move, index) => {
 						return (
-							<div
-								key={index}
-								className="m-[2vw] w-[10vw] font-bold   transition-all duration-300 ease-in-out"
+							<div key={index} className="m-[2vw] w-[10vw] font-bold   transition-all duration-300 ease-in-out"
 								style={{ color: moveColor(index), opacity: moveAlpha(index) }}>
 								{move}
 							</div>

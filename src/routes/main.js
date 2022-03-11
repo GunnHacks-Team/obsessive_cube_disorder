@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../components/Button';
+import { Link } from "react-router-dom";
 
 class Main extends React.Component {
 	render() {
@@ -24,7 +25,7 @@ class Main extends React.Component {
 				</div>
 
 				{/* START */}
-				<Button classes="absolute top-[24vw] right-[4vw]" textColor="white" bgColor="blue" size="medium"><a href="/capture">Get Started</a></Button>
+				<Button classes="absolute top-[24vw] right-[4vw]" textColor="white" bgColor="blue" size="medium"><Link to="/capture">Get Started</Link></Button>
 
 				{/* LAMBDA */}
 				<img src={require("../images/lambda.png")} className="absolute w-[45vw] top-[40vw] right-[1vw] hover:skew-y-2 hover:-skew-x-2 hover:scale-[1.03] select-none transition-all duration-1000"></img>
@@ -38,14 +39,14 @@ class Main extends React.Component {
 				</div>
 
 				{/* ABOUT THE CREATORS */}
-				<div className="flex bg-black">
-					<div className="flex">
+				<div className="flex">
+					{/* <div className="flex">
 						<div className="w-[15vw] h-[15vw] bg-gray-300 rounded-[2vw] bg-opacity-30 backdrop-blur-2xl">
 							<p className="text-white text-opacity-50 text-[1.4vw] p-[2vw] ">
 								We're proud
 							</p>
 						</div>
-					</div>
+					</div> */}
 					<div className="w-[30vw] h-[35vw] mt-[15vw] ml-[60vw] bg-black rounded-[2vw] bg-opacity-30 backdrop-blur-2xl">
 						<p className="text-[2vw] p-[2vw] ">About the Creators...</p>
 						<p className="text-white text-opacity-50 text-[1.4vw] p-[2vw] ">

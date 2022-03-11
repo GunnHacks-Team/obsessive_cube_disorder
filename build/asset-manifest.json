@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/obsessive_cube_disorder/static/css/main.f15342bb.css",
+    "main.js": "/obsessive_cube_disorder/static/js/main.fe2e8b5b.js",
+    "static/media/cubes.png": "/obsessive_cube_disorder/static/media/cubes.1063338ea17c43c55a1f.png",
+    "static/media/lambda.png": "/obsessive_cube_disorder/static/media/lambda.f35a5e1701748f62eabc.png",
+    "index.html": "/obsessive_cube_disorder/index.html",
+    "main.f15342bb.css.map": "/obsessive_cube_disorder/static/css/main.f15342bb.css.map",
+    "main.fe2e8b5b.js.map": "/obsessive_cube_disorder/static/js/main.fe2e8b5b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f15342bb.css",
+    "static/js/main.fe2e8b5b.js"
+  ]
+}
